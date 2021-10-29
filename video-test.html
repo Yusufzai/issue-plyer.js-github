@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videos js test</title>
+
+    <!-- Font Family -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800;900&family=Nunito:wght@200;300;400;600&display=swap" rel="stylesheet">
+    <!-- Font Family -->
+    
+    <link rel="stylesheet" href="./plugins/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.9/plyr.css" />
+    <script src="https://cdn.plyr.io/3.6.9/plyr.js"></script>
+
+    <style>
+        .video-container {
+            width: 150px;
+            margin: 0 auto;
+        }
+        .video-container.mini-canvas > .plyr {
+            filter: blur(2px);
+            
+        }
+        .video-container.mini-canvas .plyr__controls {
+            display: none;
+        }
+
+    </style>
+    
+</head>
+<body>
+
+    <div class="video-container mini-canvas">
+        <video id="player" playsinline class="js-player">
+            <source src="./background-image3.mp4" type="video/mp4" />
+          </video>
+
+    </div>
+
+    <div class="video-container mini-canvas">
+        <video id="player" playsinline class="js-player">
+            <source src="./background-image3.mp4" type="video/mp4" />
+          </video>
+
+    </div>
+
+
+      <script>
+        // const player = new Plyr('#player', {
+        //     clickToPlay: true,
+        // });
+
+        const players = Array.from(document.querySelectorAll('.js-player')).map(p => new Plyr(p, {
+            clickToPlay: true,
+        }));
+
+
+
+        players.on('play', function() {
+            console.log('Play')
+            players.fullscreen.enter();
+            document.querySelector('.video-container').classList.remove('mini-canvas')
+        })
+        
+        players.on('pause', function() {
+            console.log('Pause')
+            players.fullscreen.exit();
+            document.querySelector('.video-container').classList.add('mini-canvas')
+        })
+        
+      </script>
+      
+    
+</body>
+</html>
